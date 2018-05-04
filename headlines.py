@@ -3,7 +3,6 @@
 
 import feedparser
 import json
-import urllib2
 import urllib
 from flask import Flask
 from flask import render_template
@@ -19,9 +18,9 @@ RSS_FEED = {'hacking': 'https://rss.packetstormsecurity.com/news/tags/hacking',
 
 def get_weather(query):
     api_url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=97931e3b253b78925314710b42497ae0"
-    query = urllib.quote(query)
+    query = urllib.parse.quote(query)
     url = api_url.format(query)
-    data = urllib2.urlopen(url).read()
+    data = urllib.request.urlopen(url).read()
     parsed = json.loads(data)
     weather = None
     if parsed.get("weather"):
@@ -40,7 +39,7 @@ def get_news():
     else:
         publication = query.lower()
     feed = feedparser.parse(RSS_FEED[publication])
-    weather = get_weather("Belize")
+    weather = get_weather("Belize City,Belize")
     return render_template("home.html",articles=feed['entries'],weather=weather)
 if __name__ == '__main__':
-    app.run(port=5000,debug=True)
+    app.run(port=5000,debug=True, )
