@@ -14,9 +14,9 @@ RSS_FEED = {'hacking': 'https://rss.packetstormsecurity.com/news/tags/hacking',
             'encryption': 'https://rss.packetstormsecurity.com/files/tags/encryption/',
             'exploit': 'https://rss.packetstormsecurity.com/files/tags/exploit/'}
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 def get_news():
-    query = request.args.get("publication")
+    query = request.form.get("publication")
     if not query or query.lower() not in RSS_FEED:
         publication = "hacking"
     else:
