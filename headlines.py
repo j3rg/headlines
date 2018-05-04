@@ -42,4 +42,4 @@ def get_news():
     weather = get_weather("Belize City,Belize")
     return render_template("home.html",articles=feed['entries'],weather=weather)
 if __name__ == '__main__':
-    app.run(port=5000,debug=True, )
+    app.run(port=5000,debug=True)
